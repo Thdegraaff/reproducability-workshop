@@ -1,0 +1,530 @@
+---
+title: "Version control"
+author: "Thomas De Graaff"
+date: "August 23, 2016"
+output:
+  beamer_presentation:
+    colortheme: beaver
+    highlight: zenburn
+    slide_level: 2
+    theme: Darmstadt
+  ioslides_presentation: default
+  revealjs_presentation:
+    mathjax: default
+    pandoc_args:
+    - --css
+    - fig/journal.css
+    transition: linear
+  slidy_presentation: default
+subtitle: '[`Git`]'
+---
+
+# Introduction
+
+## Version control *What*
+
+*The modern scientist's lab notebook*
+
+* Keep track of changes in a project *as they occur*
+* Document the changes
+* Archive the history in a way that allows to *easily* roll back 
+* Tell differences with other versions (collaboration) and be able to merge
+  them
+
+## Version control *Why*
+
+* **Sanity**: nothing "committed" is lost
+    + just think about GTD principles (or decluttering conform Kondo)
+* **Archival**: keep record on when what changed how
+* **Collaboration**: work simultaneously with colleagues, properly merge and manage conflicts
+
+Very [neat video](https://www.youtube.com/watch?v=hNENiG7LAnc) exemplifying the concept
+
+
+# `git`---theory
+
+## `git`
+
+Today:
+
+* Set up a new project
+* Track changes as you work
+* Examine the change history
+* Compare different versions
+* Restore old versions of a file
+* Other tricks to better manage your `git` project
+
+Not today (but you should check it out):
+
+* [Collaboration](http://software-carpentry.org/v5/novice/git/02-collab.html) with `git`
+* [Conflicts](http://software-carpentry.org/v5/novice/git/03-conflict.html) in `git`
+
+## Why not, e.g., `Dropbox`? 
+
+`Dropbox` allows as well for
+
+- collaboration (if not only with yourself)
+- rolling back (see historical versions)
+
+Main differences
+
+- `Git` is `better' in noting the differences between versions
+- `Git` is able to merge differences between versions 
+    + between you and yourself
+    + between you and others 
+
+## How does it work?
+
+![distributed version control systems](fig/distributed.png)
+
+(Source: [git-scm.com/book/](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control))
+
+## Taking snapshots
+
+![History of snapshots](fig/snapshots.png)
+
+(Source: [git-scm.com/book/](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics))
+
+## The three states
+
+![Working directory, staging area and Git directory](fig/areas.png)
+
+(Source: [git-scm.com/book/](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics))
+
+## Unnessarily complex? 
+
+Go to `Github Desktop` and
+
+* see your changes in your copy of ERSA-WooW
+* commit those changes with a message (done the Markdown assignment!)
+* push the **Sync** thingie
+
+# `git`---practice
+
+## `git` - Requirements & Setup
+
+- Open terminal (`Tools and options` > `Open in Git Shell`)
+
+- Assuming you have `git` installed:
+
+```bash
+$ git config --global user.name "Your Name"
+$ git config --global user.email "your@email.org"
+```
+
+- These are for attribution purposes only, it does not sign you up for any
+service
+
+## `git` - New project (repository)
+
+Navigate to the folder where you want to create the new project (not ERSA-WooW!) and create the directory, naming it the way you prefer:
+
+```bash
+$ cd ..
+$ mkdir GreatPaper
+$ cd GreatPaper
+```
+
+Then start tracking:
+
+```bash
+$ git init
+```
+
+## `git` - New project (repository) (cnt.)
+
+This will create a hidden folder called `.git`, which will story all the
+history (although you will never access it directly).
+
+A very common command you will use repeatedly is `status`:
+
+```bash
+$ git status
+
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use "git add" to track)
+```
+
+## `git` - Work...
+
+Start, for example, with one text file. You can create it from the text editor
+of your preference, or you can create it using a command line editor, but let us open a new file in `Rstudio`, titled:
+
+```markdown
+nobelp_paper.md
+```
+
+And start working:
+
+```markdown
+The world is flat.
+```
+
+## `git` - Work... (cnt.)
+
+Take a break. Save and quit the file. And now check the status of the `git`
+project:
+
+```bash
+$ git status
+
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	nobelp_paper.md
+nothing added to commit but untracked files present (use "git add" to track)
+```
+
+## `git` - ... and track your work!
+
+At this point, you want `nobelp_paper.md` to be tracked as you work on it.
+This does *not* come automatically (like in Dropbox, for example), but you
+need to explicitly add the file:
+
+```bash
+$ git add nobelp_paper.md
+```
+
+Now `git` knows it has to keep an eye on the file:
+
+## `git` - ... and track your work! (cnt.)
+
+```bash
+$ git status
+
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#	new file:   nobelp_paper.md
+#
+```
+
+To record the file at a given stage, you need to "commit" the changes. Include
+a (short) message describing the advancement:
+
+```bash
+$ git commit -m "Current state of knowledge about Earth"
+```
+
+Everything is properly recorded at this point.
+
+## `git` - Why `add` and `commit`?
+
+![Local spaces](fig/git-staging-area.png)
+
+(Source: [Software Carpentry](http://software-carpentry.org/v5/novice/git/img/git-staging-area.png))
+
+## `git` - Why `add` and `commit`? (cnt.)
+
+```bash
+$ git status
+
+# On branch master
+nothing to commit, working directory clean
+```
+
+It means you could keep working, not add, and, when you commit, only the added
+version will be tracked. Very useful when a project has **many files**!
+
+## `git` - Work, track, work, track...
+
+```markdown
+edit nobelp_paper.md
+```
+
+```markdown
+The world is NOT flat.
+```
+
+```bash
+$ git status
+
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   nobelp_paper.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+## `git` - Work, track, work, track... (cnt.)
+
+Since the file is under tracking already, you can `add` and `commit` in a
+single shot:
+
+```bash
+$ git commit -am "Correcting view about Earth"
+
+[master a643fa0] Correcting view about Earth
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+Repeat this process as many times as snapshots you want to record of your
+project.
+
+## `git` - Examine log
+
+```bash
+$ git log
+
+commit b4eeaafcff25d9e6464adbd5083c0202ccce7d90
+Author: Thomas de Graaff <t.de.graaff@vu.nl>
+Date:   Mon Aug 15 12:09:39 2016 +0200
+
+    Correcting view about Earth
+
+commit 7505fa61d973083d6d33791fc38ad57291c55a92
+Author: Thomas de Graaff <t.de.graaff@vu.nl>
+Date:   Mon Aug 15 12:08:37 2016 +0200
+
+    Current state of knowledge about Earth
+
+```
+
+## `git` - Examine log (cnt.)
+
+Or a more compressed view...
+
+```bash
+$ git log --pretty=oneline
+
+b4eeaafcff25d9e6464adbd5083c0202ccce7d90 Correcting view about Earth
+7505fa61d973083d6d33791fc38ad57291c55a92 Current state of knowledge about Earth
+
+```
+
+Or more detailed:
+
+```bash
+$ git log --pretty=format:"%h - %a, %ar : %s"
+
+b4eeaaf - %a,  4 minutes ago : Correcting view about Earth
+7505fa6 - %a,  5 minutes ago : Current state of knowledge about Earth
+```
+
+See more details about tweaking `git log` in [this link](http://www.git-scm.com/book/en/Git-Basics-Viewing-the-Commit-History).
+
+## `git` - Compare versions
+
+Current version from last one tracked (`HEAD`):
+
+```markdown
+nobelp_paper.md
+```
+
+```markdown
+The world is NOT flat at all.
+```
+
+```bash
+$ git diff
+
+diff --git a/nobelp_paper.md b/nobelp_paper.md
+index 5a35641..3215244 100644
+--- a/nobelp_paper.md
++++ b/nobelp_paper.md
+@@ -1 +1 @@
+-The world is NOT flat.
++The world is NOT flat at all.
+```
+
+## `git` - Compare versions (cnt.)
+
+You can go back in time n revisions (`HEAD~n`):
+
+```bash
+$ git commit -am "Reaffirming myself about Earth's non-flatness"
+```
+
+```bash
+$ git diff HEAD~2 nobelp_paper.md
+
+diff --git a/nobelp_paper.md b/nobelp_paper.md
+index 3fa4573..3215244 100644
+--- a/nobelp_paper.md
++++ b/nobelp_paper.mdgit 
+@@ -1 +1 @@
+-The world is flat.
++The world is NOT flat at all.
+```
+
+## `git` - Compare versions (ctd.)
+
+Or compare with a specific revision (check log for that):
+
+```bash
+$ git diff 7505fa6  nobelp_paper.md
+
+diff --git a/nobelp_paper.md b/nobelp_paper.md
+index 3fa4573..3215244 100644
+--- a/nobelp_paper.txt
++++ b/nobelp_paper.txt
+@@ -1 +1 @@
+-The world is flat.
++The world is NOT flat at all.
+```
+
+## `git` - Compare versions (cnt.)
+
+Or compare two previous versions:
+
+```bash
+$ git diff 7505fa6 b4eeaaf nobelp_paper.md
+
+diff --git a/nobelp_paper.md b/nobelp_paper.md
+index 3fa4573..5a35641 100644
+--- a/nobelp_paper.md
++++ b/nobelp_paper.md
+@@ -1 +1 @@
+-The world is flat.
++The world is NOT flat.
+```
+
+## `git` - Restore older version
+
+Suppose we delete the file by accident:
+
+```bash
+$ rm nobelp_paper.md
+```
+
+Bringing the last version back is straightforward:
+
+```bash
+$ git checkout HEAD nobelp_paper.md
+```
+
+Also works if you decide to go back to a previous version of the file:
+
+```bash
+$ git checkout HEAD~2 nobelp_paper.md
+```
+
+## `git` - Restore older version (cnt.)
+
+These modifications act as if you had edited the file:
+
+```bash
+$ git status
+
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   nobelp_paper.md
+
+```
+
+So if you want to save the project at that stage again, commit:
+
+```bash
+$ git commit -am "Going back to original ideas"
+```
+
+## Checkout versus revert
+
+- Checkout allows you to go back in time and restore that version
+
+    - with **all** subsequent changes lost!
+    
+- Revert only undoes the changes of that **specific** commit
+
+    - more elegant
+    - but quickly conflicts need to be resolved
+
+## `git` - Several files
+
+* `git` tracks "**snapshots**" of the project, rather than changes in particular
+files.
+* Extending this process to several files in the project is straightforward 
+* The previous workflow favors keeping things organized in **different files**. Although you can manage everything in one master file, having the
+sections of a paper split into different files makes going back and forth in time much easier and flexible.
+
+## Exercise
+
+* Create a new file with some text and include in the tracking.
+* Make a change in the file and commit it.
+* Bring the project to a state where `nobelp_paper.md` is in the initial
+  version and the new file is at the latest.
+
+## Exercise (suggested) result
+
+With `RStudio`
+```markdown
+corollary.md
+```
+
+```markdown
+I am not really sure about Earth's flatness.
+```
+
+```bash
+$ git add corollary.md
+$ git commit -am "Adding corollary"
+```
+
+With `RStudio`
+```markdown
+corollary.md
+```
+
+```markdown
+I am not really sure about Earth's flatness, it depends.
+```
+
+```bash
+$ git commit -am "Introducing uncertainty to corollary"
+```
+## Exercise (suggested) result (cnt.)
+
+```bash
+$ git log --pretty=oneline nobelp_paper.md
+
+25acad2069d72947e5aa2e21ddfe4509205ded88 Going back to original ideas
+cfccca975f95ba6588ce07360f4507d5a796b20a Reaffirming myself about Earth's non-flatness
+a643fa0ca03291793cb432d799defd0f496b5c9a Correcting view about Earth
+6d119ff4a319650bfef06d279b000a56f5fe7759 Current state of knowledge about Eart
+
+$ git checkout 6d119ff4a319650bfef06d279b000a56f5fe7759 nobelp_paper.md
+$ git commit -am "Completing exercise"
+```
+
+## `git` - Get selective on a project
+
+* A project might have several files (we've seen how to deal with that)
+* Some of those you might prefer to exclude (or not care to include)
+* By default they will not be tracked
+* You can create a `.gitignore` file in the root folder listing files to be
+  explicitly excluded from tracking
+
+- With `RStudio` create/edit `.gitignore` file 
+
+```bash
+$ git add .gitignore
+$ git commit -m "Adding ignore file"
+```
+## `git` - Get selective on a project (cnt.)
+
+```bash
+*.aux
+```
+
+```bash
+$ git status
+
+On branch master
+nothing to commit, working directory clean
+```

@@ -1,0 +1,96 @@
+---
+title: "Version control"
+author: "Thomas De Graaff"
+date: "August 23, 2016"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  revealjs_presentation:
+    mathjax: default
+    pandoc_args:
+    - --css
+    - fig/journal.css
+    transition: linear
+  beamer_presentation:
+    colortheme: beaver
+    highlight: zenburn
+    slide_level: 2
+    theme: Darmstadt
+subtitle: '[`GitHub`]'
+---
+
+# Introduction
+
+## What is `GitHub`?
+
++ `GitHub` is a web-based Git repository hosting service (Wikipedia).
++ Directed to hosts open source projects 
++ Social network functionality (fork/clone projects)
++ Other main competitor: `Bitbucket`
+
+![Octocat](fig/Octocat.png)
+
+
+## Why publish on `GitHub`?
+
++ You can easily share everything that is related to your paper
+    - Text 
+    - Code
+    - Figures/Tables
++ Could serve as supplementary repository to articles
++ Cooperate with others using `Git` and `GitHub`
++ Timestamp your work 
++ `Github` can host static webpages (in combination with, e.g., Jekyll)
+    - In fact, all these workshop materials and this website is just one repository on GitHub [ERSA-WooW](https://github.com/Thdegraaff/ERSA-WooW)
+
+## How to publish on `GitHub`?
+
++ You **pull** material from `GitHub` and you **push** material to `Github`
++ Typical workflow:
+    1. *Pull* changes from `Github`
+    2. Work 
+    3. Commit your changes to your *local* repository
+    4. Work
+    5. Commit your changes to your *local* repository
+    6. etc.
+    7. Push all changes to `Github`
+        - Possibly solve conflicts when cooperating 
+
+With `GitHub` Desktop push/pull is replace by sync (initial one is publish)
+
+# Assignments: Working with `GitHub` and `GitHub` desktop
+
+## Assingment 1: 
+1. Open ERSA-WooW in `GitHub` desktop
+2. Commit changes of your Markdown paper to `GitHub` desktop
+3. Sync your Markdown paper to your `GitHub` account
+    
+## Assignment 2: 
+1. Create new project folder `MyPaper`
+2. Copy the `html` result of the `Markdown` assignment in `MyPaper`
+3. Rename `Assingment1.html` in `index.html`
+4. Initialise a `Git` repository in `Github` desktop (with `Create`)
+5. Add and commit your paper
+6. Create a new branch called `gh-pages`
+7. And publish all to `Github`
+8. Look at the website http://_YourGitHubname_.github.io/MyPaper
+
+# In conclusion
+
+## In conclusion
+
+- Markdown is easy to learn and incredibly useful
+  
+    - blogs/website
+    - to-do lists
+    - slides
+    - papers
+
+- Versioning is **very** important but often forgotten
+
+- Open repositories are becoming incredibly useful (if not only to provide background material to your papers)
+
+- Do not be afraid to open up your research
+    
+    - large benefits for the scientific community at large
+    - large benefits for the individual researcher
