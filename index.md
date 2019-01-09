@@ -1,4 +1,8 @@
---- title: Home category: home layout: default ---
+---
+title: Home
+category: home
+layout: default
+---
 
 ## {{site.data.course.name}}
 
@@ -9,13 +13,11 @@ This is the workshop website for **{{site.data.course.number}}**: the
 
 Did you ever:
 
-- want to use your text both for papers and websites or blogs; feel
-- constrained by Microsoft's `Word` (but hesitate to adopt `LaTeX`);
-- want to go back to a previous version of the text but accidentally
-- deleted it or argue with co-authors which document version was
-- actually the latest; think that it would be nice (and very
-- efficient) if you could easily share and access background material
-- of papers, workshops or lectures?
+- want to use your text both for papers and websites or blogs;
+- feel constrained by Microsoft's `Word` (but hesitate to adopt `LaTeX`);
+- want to go back to a previous version of the text but accidentally deleted it or argue with co-authors which document version was
+actually the latest;
+- think that it would be nice (and very efficient) if you could easily share and access background material- of papers, workshops or lectures?
 
 But did not know how to start with this, then this workshop might be
 of interest to you.
@@ -79,8 +81,10 @@ Students from TSCM and STREEM
 
 No previous knowledge required
 
-#### When 
+#### When
+
+tba
 
 #### Where
 
-
+tba
