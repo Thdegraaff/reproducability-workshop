@@ -1,5 +1,4 @@
-number: ERSA-WooW
-name: ERSA Workshop on open Workflows
-description: >-
-  One workshop of three hours dealing with the basics of markdown in combination with Git and GitHub
-term: Summer 2016
+number: reproducability-workshop
+name: Two workshops dealing with various aspects of reproducability (versioning, online repositories, markdown) 
+description: Two workshop of two hours dealing with the basics of markdown in combination with Git and GitHub
+term: January 2019
