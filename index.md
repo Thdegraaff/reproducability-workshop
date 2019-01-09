@@ -24,7 +24,7 @@ of interest to you.
 
 ### Aim of the workshop
 
-To get regional scientists familiar with `Markdown`, the versioning
+To get master students familiar with `Markdown`, the versioning
 system `Git` and using open repositories, in particular `GitHub`.
 
 From a wider perspective, these type of tools serve brilliantly to
